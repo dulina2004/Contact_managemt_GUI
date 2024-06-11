@@ -78,6 +78,7 @@ class DeleteContactForm extends JFrame {
         btnDelete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 ContactController.deleteContact(index);
+                JOptionPane.showMessageDialog(null, "Contact deleted successfully", "Success", JOptionPane.NO_OPTION);
             }
         });
 

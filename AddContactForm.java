@@ -5,6 +5,7 @@ import java.awt.event.*;
 class AddContactForm extends JFrame {
     private JButton btnAddCustomer;
     private JButton btnCancel;
+    private JButton btnHome;
     private String tempId = ContactDBConnection.getInstance().getContactList().generateID();
     private JTextField txtName;
     private JTextField txtMobile;
@@ -42,18 +43,78 @@ class AddContactForm extends JFrame {
         btnAddCustomer.setFont(new Font("", 1, 20));
         btnAddCustomer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                // String id = txtId.getText();
-                tempId = ContactDBConnection.getInstance().getContactList().generateID();
-                String id = tempId;
-                String name = txtName.getText();
-                String mobile = txtMobile.getText();
-                String Company = txtCompany.getText();
-                double salary = Double.parseDouble(txtSalary.getText());
-                String birthday = txtBirthday.getText();
-                Contact contact = new Contact(id, name, mobile, Company, salary, birthday);
-                // ContactMainForm.customerList.add(contact);
-                ContactController.addContact(contact);
-                idlabel.setText(ContactDBConnection.getInstance().getContactList().generateID());
+                try {
+                    tempId = ContactDBConnection.getInstance().getContactList().generateID();
+                    String id = tempId;
+                    String name = txtName.getText();
+                    String mobile = txtMobile.getText();
+                    String Company = txtCompany.getText();
+                    double salary = Double.parseDouble(txtSalary.getText());
+                    String birthday = txtBirthday.getText();
+
+                    if (!ContactController.isValidMobile(mobile)) {
+                        int option = JOptionPane.showConfirmDialog(null,
+                                "Invalid mobile Number... Do you want to input number again ?");
+                        if (option == JOptionPane.YES_OPTION) {
+                            txtMobile.setText("");
+                            txtMobile.requestFocus();
+                        } else if (option == JOptionPane.NO_OPTION) {
+                            txtMobile.setText("");
+                            txtName.setText("");
+                            txtCompany.setText("");
+                            txtSalary.setText("");
+                            txtBirthday.setText("");
+                            dispose();
+                        }
+                        return;
+                    }
+
+                    if (!ContactController.isValidSalary(salary)) {
+                        int option = JOptionPane.showConfirmDialog(null,
+                                "Invalid salary... Do you want to input salary again ?");
+                        if (option == JOptionPane.YES_OPTION) {
+                            txtSalary.setText("");
+                            txtSalary.requestFocus();
+                        } else if (option == JOptionPane.NO_OPTION) {
+                            txtMobile.setText("");
+                            txtName.setText("");
+                            txtCompany.setText("");
+                            txtSalary.setText("");
+                            txtBirthday.setText("");
+                            dispose();
+                        }
+                        return;
+                    }
+
+                    if (!ContactController.isValidBirthday(birthday)) {
+                        int option = JOptionPane.showConfirmDialog(null,
+                                "Invalid birthday... Do you want to input birthday again ?");
+                        if (option == JOptionPane.YES_OPTION) {
+                            txtBirthday.setText("");
+                            txtBirthday.requestFocus();
+                        } else if (option == JOptionPane.NO_OPTION) {
+                            txtMobile.setText("");
+                            txtName.setText("");
+                            txtCompany.setText("");
+                            txtSalary.setText("");
+                            txtBirthday.setText("");
+                            dispose();
+                        }
+                        return;
+                    }
+
+                    Contact contact = new Contact(id, name, mobile, Company, salary, birthday);
+                    ContactController.addContact(contact);
+                    JOptionPane.showMessageDialog(null, "Contact added successfully", "Success", JOptionPane.NO_OPTION);
+                    txtName.setText("");
+                    txtMobile.setText("");
+                    txtCompany.setText("");
+                    txtSalary.setText("");
+                    txtBirthday.setText("");
+                    idlabel.setText(ContactDBConnection.getInstance().getContactList().generateID());
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Please Enter details", "Error", JOptionPane.ERROR_MESSAGE);
+                }
 
             }
         });
@@ -64,11 +125,31 @@ class AddContactForm extends JFrame {
         btnCancel.setFont(new Font("", 1, 20));
         buttonPanel.add(btnCancel);
 
-        // btnCancel.addActionListener(new ActionListener() {
-        // public void actionPerformed(ActionEvent evt) {
-        // System.out.println("hi");
-        // }
-        // });
+        btnCancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                txtName.setText("");
+                txtMobile.setText("");
+                txtCompany.setText("");
+                txtSalary.setText("");
+                txtBirthday.setText("");
+
+            }
+        });
+
+        btnHome = new JButton("Back To home");
+        btnHome.setFont(new Font("", 1, 20));
+        buttonPanel.add(btnHome);
+
+        btnHome.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                txtMobile.setText("");
+                txtName.setText("");
+                txtCompany.setText("");
+                txtSalary.setText("");
+                txtBirthday.setText("");
+                dispose();
+            }
+        });
 
         add("South", buttonPanel);
 

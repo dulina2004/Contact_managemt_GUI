@@ -85,8 +85,71 @@ class UpdateContactForm extends JFrame {
                 double salary = Double.parseDouble(txtSalary.getText());
                 String birthday = txtBirthday.getText();
 
+                if (!ContactController.isValidMobile(mobile)) {
+                    int option = JOptionPane.showConfirmDialog(null,
+                            "Invalid mobile Number... Do you want to input number again ?");
+                    if (option == JOptionPane.YES_OPTION) {
+                        txtMobile.setText("");
+                        txtMobile.requestFocus();
+                    } else if (option == JOptionPane.NO_OPTION) {
+                        txtMobile.setText("");
+                        txtName.setText("");
+                        txtCompany.setText("");
+                        txtSalary.setText("");
+                        txtBirthday.setText("");
+                        dispose();
+                    }
+                    return;
+                }
+
+                if (!ContactController.isValidSalary(salary)) {
+                    int option = JOptionPane.showConfirmDialog(null,
+                            "Invalid salary... Do you want to input salary again ?");
+                    if (option == JOptionPane.YES_OPTION) {
+                        txtSalary.setText("");
+                        txtSalary.requestFocus();
+                    } else if (option == JOptionPane.NO_OPTION) {
+                        txtMobile.setText("");
+                        txtName.setText("");
+                        txtCompany.setText("");
+                        txtSalary.setText("");
+                        txtBirthday.setText("");
+                        dispose();
+                    }
+                    return;
+                }
+
+                if (!ContactController.isValidBirthday(birthday)) {
+                    int option = JOptionPane.showConfirmDialog(null,
+                            "Invalid birthday... Do you want to input birthday again ?");
+                    if (option == JOptionPane.YES_OPTION) {
+                        txtBirthday.setText("");
+                        txtBirthday.requestFocus();
+                    } else if (option == JOptionPane.NO_OPTION) {
+                        txtMobile.setText("");
+                        txtName.setText("");
+                        txtCompany.setText("");
+                        txtSalary.setText("");
+                        txtBirthday.setText("");
+                        dispose();
+                    }
+                    return;
+                }
+
                 // ContactMainForm.customerList.add(contact);
                 ContactController.updateContacts(name, mobile, Company, salary, birthday, index);
+                JOptionPane.showMessageDialog(null, "Contact updated successfully", "Success", JOptionPane.NO_OPTION);
+
+            }
+        });
+
+        btnCancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                txtName.setText("");
+                txtMobile.setText("");
+                txtCompany.setText("");
+                txtSalary.setText("");
+                txtBirthday.setText("");
 
             }
         });
