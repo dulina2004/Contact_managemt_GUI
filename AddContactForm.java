@@ -54,7 +54,9 @@ class AddContactForm extends JFrame {
 
                     if (!ContactController.isValidMobile(mobile)) {
                         int option = JOptionPane.showConfirmDialog(null,
-                                "Invalid mobile Number... Do you want to input number again ?");
+                                "Invalid mobile Number... Do you want to input number again ?", "confirm",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE);
                         if (option == JOptionPane.YES_OPTION) {
                             txtMobile.setText("");
                             txtMobile.requestFocus();
@@ -71,7 +73,9 @@ class AddContactForm extends JFrame {
 
                     if (!ContactController.isValidSalary(salary)) {
                         int option = JOptionPane.showConfirmDialog(null,
-                                "Invalid salary... Do you want to input salary again ?");
+                                "Invalid salary... Do you want to input salary again ?", "confirm",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE);
                         if (option == JOptionPane.YES_OPTION) {
                             txtSalary.setText("");
                             txtSalary.requestFocus();
@@ -88,7 +92,9 @@ class AddContactForm extends JFrame {
 
                     if (!ContactController.isValidBirthday(birthday)) {
                         int option = JOptionPane.showConfirmDialog(null,
-                                "Invalid birthday... Do you want to input birthday again ?");
+                                "Invalid birthday... Do you want to input birthday again ?", "confirm",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE);
                         if (option == JOptionPane.YES_OPTION) {
                             txtBirthday.setText("");
                             txtBirthday.requestFocus();

@@ -81,7 +81,8 @@ class DeleteContactForm extends JFrame {
             public void actionPerformed(ActionEvent evt) {
 
                 int option = JOptionPane.showConfirmDialog(null,
-                        "Do you want to delete this contact??");
+                        "Do you want to delete this contact??", "confirm", JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
                 if (option == JOptionPane.YES_OPTION) {
                     ContactController.deleteContact(index);
                     JOptionPane.showMessageDialog(null, "Contact deleted successfully", "Success",
