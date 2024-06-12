@@ -43,7 +43,18 @@ public class ContactController {
         contactList.sortBirthday();
     }
 
+    private static boolean isDuplicateMobile(String mobile) {
+        return (ContactDBConnection.getInstance().getContactList().search(mobile) == -1) ? true : false;
+    }
+
     public static boolean isValidMobile(String mobile) {
+        if (mobile.length() == 10 && mobile.charAt(0) == '0' && isDuplicateMobile(mobile)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isValidMobile(String mobile, int index) {
         if (mobile.length() == 10 && mobile.charAt(0) == '0') {
             return true;
         }

@@ -13,11 +13,11 @@ public class ListContact extends JFrame {
     private JButton listByBirthday;
     private JButton btnExit;
 
-    private AddContactForm addContactForm;
-    private UpdateContactForm updateContactForm;
-    private DeleteContactForm deleteContactForm;
-    private SearchContactForm searchContactForm;
-    private ListContact listContact;
+    // private AddContactForm addContactForm;
+    // private UpdateContactForm updateContactForm;
+    // private DeleteContactForm deleteContactForm;
+    // private SearchContactForm searchContactForm;
+    // private ListContact listContact;
     private ViewContactForm viewByName;
     private ViewContactForm viewBySalary;
     private ViewContactForm viewByBirthday;
@@ -104,7 +104,7 @@ public class ListContact extends JFrame {
         btnExit.setFont(new Font("", Font.ROMAN_BASELINE, 15));
         btnExit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                System.exit(0);
+                dispose();
             }
         });
         gbc.gridx = 1;

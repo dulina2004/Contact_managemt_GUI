@@ -72,7 +72,6 @@ class UpdateContactForm extends JFrame {
 
         btnCancel = new JButton("Back To HomePage");
         btnCancel.setFont(new Font("", 1, 20));
-        buttonPanel.add(btnCancel);
 
         btnUpdate = new JButton("Update Customer");
         btnUpdate.setFont(new Font("", 1, 20));
@@ -85,7 +84,7 @@ class UpdateContactForm extends JFrame {
                 double salary = Double.parseDouble(txtSalary.getText());
                 String birthday = txtBirthday.getText();
 
-                if (!ContactController.isValidMobile(mobile)) {
+                if (!ContactController.isValidMobile(mobile, index)) {
                     int option = JOptionPane.showConfirmDialog(null,
                             "Invalid mobile Number... Do you want to input number again ?");
                     if (option == JOptionPane.YES_OPTION) {
@@ -139,6 +138,13 @@ class UpdateContactForm extends JFrame {
                 // ContactMainForm.customerList.add(contact);
                 ContactController.updateContacts(name, mobile, Company, salary, birthday, index);
                 JOptionPane.showMessageDialog(null, "Contact updated successfully", "Success", JOptionPane.NO_OPTION);
+                txtMobile.setText("");
+                txtName.setText("");
+                txtCompany.setText("");
+                txtSalary.setText("");
+                txtBirthday.setText("");
+                txtId.setText("");
+                txtsearch.setText("");
 
             }
         });
@@ -150,11 +156,13 @@ class UpdateContactForm extends JFrame {
                 txtCompany.setText("");
                 txtSalary.setText("");
                 txtBirthday.setText("");
-
+                txtsearch.setText("");
+                dispose();
             }
         });
 
         buttonPanel.add(btnUpdate);
+        buttonPanel.add(btnCancel);
 
         add("South", buttonPanel);
 

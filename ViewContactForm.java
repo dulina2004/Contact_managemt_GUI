@@ -29,15 +29,26 @@ class ViewContactForm extends JFrame {
         } else if (x == 2) {
             ContactController.sortBirthday();
         }
-        setSize(400, 300);
+        setSize(600, 300);
         setTitle("");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        setResizable(false);
 
+        // JLabel titleLabel = new JLabel(title);
+        // titleLabel.setFont(new Font("", 1, 30));
+        // titleLabel.setHorizontalAlignment(JLabel.CENTER);
+        // add("North", titleLabel);
+
+        JPanel container = new JPanel();
+        JPanel n = new JPanel(new GridLayout(2, 1));
         JLabel titleLabel = new JLabel(title);
-        titleLabel.setFont(new Font("", 1, 30));
+        container.setBackground(new Color(153, 205, 253));
+        n.setBackground(new Color(153, 205, 253));
+        titleLabel.setFont(new Font("", 1, 35));
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        add("North", titleLabel);
+        container.add(titleLabel);
+        add("North", container);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         btnReload = new JButton("Reload");
@@ -76,15 +87,26 @@ class ViewContactForm extends JFrame {
 
     ViewContactForm() {
 
-        setSize(400, 300);
+        setSize(600, 300);
         setTitle("title");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        setResizable(false);
 
-        JLabel titleLabel = new JLabel("View Customer Form");
-        titleLabel.setFont(new Font("", 1, 30));
+        // JLabel titleLabel = new JLabel("View Customer Form");
+        // titleLabel.setFont(new Font("", 1, 30));
+        // titleLabel.setHorizontalAlignment(JLabel.CENTER);
+        // add("North", titleLabel);
+
+        JPanel title = new JPanel();
+        JPanel n = new JPanel(new GridLayout(2, 1));
+        JLabel titleLabel = new JLabel("UPDATE CONTACT");
+        title.setBackground(new Color(153, 205, 253));
+        n.setBackground(new Color(153, 205, 253));
+        titleLabel.setFont(new Font("", 1, 35));
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        add("North", titleLabel);
+        title.add(titleLabel);
+        add("North", title);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         btnReload = new JButton("Reload");

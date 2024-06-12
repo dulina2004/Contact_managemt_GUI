@@ -54,7 +54,7 @@ class DeleteContactForm extends JFrame {
                     Contact contact = ContactDBConnection.getInstance().getContactList().get(index);
                     txtId.setText(contact.getId());
                     txtName.setText(contact.getName());
-                    txtMobile.setText(contact.getMobile());
+                    txtMobile.setText(contact.getMobile() + "                        ");
                     txtCompany.setText(contact.getCompany());
                     txtSalary.setText(contact.getSalary() + "");
                     txtBirthday.setText(contact.getBirthday());
@@ -65,20 +65,49 @@ class DeleteContactForm extends JFrame {
                     txtCompany.setText("");
                     txtSalary.setText("");
                     txtBirthday.setText("");
+                    JOptionPane.showMessageDialog(null, "No Contact found!!", "",
+                            JOptionPane.NO_OPTION);
                 }
 
             }
         });
 
-        btnCancel = new JButton("Cancel");
+        btnCancel = new JButton("Home");
         btnCancel.setFont(new Font("", 1, 20));
 
         btnDelete = new JButton("Delete");
         btnDelete.setFont(new Font("", 1, 20));
         btnDelete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                ContactController.deleteContact(index);
-                JOptionPane.showMessageDialog(null, "Contact deleted successfully", "Success", JOptionPane.NO_OPTION);
+
+                int option = JOptionPane.showConfirmDialog(null,
+                        "Do you want to delete this contact??");
+                if (option == JOptionPane.YES_OPTION) {
+                    ContactController.deleteContact(index);
+                    JOptionPane.showMessageDialog(null, "Contact deleted successfully", "Success",
+                            JOptionPane.NO_OPTION);
+                }
+
+                txtMobile.setText("");
+                txtName.setText("");
+                txtCompany.setText("");
+                txtSalary.setText("");
+                txtBirthday.setText("");
+                txtId.setText("");
+                txtsearch.setText("");
+            }
+        });
+
+        btnCancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                txtMobile.setText("");
+                txtName.setText("");
+                txtCompany.setText("");
+                txtSalary.setText("");
+                txtBirthday.setText("");
+                txtId.setText("");
+                txtsearch.setText("");
+                dispose();
             }
         });
 

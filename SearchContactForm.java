@@ -53,7 +53,7 @@ class SearchContactForm extends JFrame {
                     Contact contact = ContactDBConnection.getInstance().getContactList().get(index);
                     txtId.setText(contact.getId());
                     txtName.setText(contact.getName());
-                    txtMobile.setText(contact.getMobile());
+                    txtMobile.setText(contact.getMobile() + "                        ");
                     txtCompany.setText(contact.getCompany());
                     txtSalary.setText(contact.getSalary() + "");
                     txtBirthday.setText(contact.getBirthday());
@@ -64,6 +64,7 @@ class SearchContactForm extends JFrame {
                     txtCompany.setText("");
                     txtSalary.setText("");
                     txtBirthday.setText("");
+                    txtsearch.setText("");
                 }
 
             }
@@ -72,6 +73,18 @@ class SearchContactForm extends JFrame {
         btnCancel = new JButton("Back To HomePage");
         btnCancel.setFont(new Font("", 1, 20));
         buttonPanel.add(btnCancel);
+
+        btnCancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                txtId.setText("");
+                txtName.setText("");
+                txtMobile.setText("");
+                txtCompany.setText("");
+                txtSalary.setText("");
+                txtBirthday.setText("");
+                dispose();
+            }
+        });
 
         add("South", buttonPanel);
 
