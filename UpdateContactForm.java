@@ -14,6 +14,7 @@ class UpdateContactForm extends JFrame {
     private JTextField txtCompany;
     private JTextField txtSalary;
     private JTextField txtBirthday;
+    private String tempMobile = "";
 
     UpdateContactForm() {
         setSize(600, 500);
@@ -58,6 +59,12 @@ class UpdateContactForm extends JFrame {
                     txtCompany.setText(contact.getCompany());
                     txtSalary.setText(contact.getSalary() + "");
                     txtBirthday.setText(contact.getBirthday());
+
+                    try {
+                        tempMobile = contact.getMobile();
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }
                 } else {
                     txtId.setText("");
                     txtName.setText("");
@@ -84,21 +91,40 @@ class UpdateContactForm extends JFrame {
                 double salary = Double.parseDouble(txtSalary.getText());
                 String birthday = txtBirthday.getText();
 
-                if (!ContactController.isValidMobile(mobile, index)) {
-                    int option = JOptionPane.showConfirmDialog(null,
-                            "Invalid mobile Number... Do you want to input number again ?");
-                    if (option == JOptionPane.YES_OPTION) {
-                        txtMobile.setText("");
-                        txtMobile.requestFocus();
-                    } else if (option == JOptionPane.NO_OPTION) {
-                        txtMobile.setText("");
-                        txtName.setText("");
-                        txtCompany.setText("");
-                        txtSalary.setText("");
-                        txtBirthday.setText("");
-                        dispose();
+                if (mobile.equals(tempMobile)) {
+                    if (!ContactController.isValidMobile(mobile, index)) {
+                        int option = JOptionPane.showConfirmDialog(null,
+                                "Invalid mobile Number... Do you want to input number again ?");
+                        if (option == JOptionPane.YES_OPTION) {
+                            txtMobile.setText("");
+                            txtMobile.requestFocus();
+                        } else if (option == JOptionPane.NO_OPTION) {
+                            txtMobile.setText("");
+                            txtName.setText("");
+                            txtCompany.setText("");
+                            txtSalary.setText("");
+                            txtBirthday.setText("");
+                            dispose();
+                        }
+                        return;
                     }
-                    return;
+                } else {
+                    if (!ContactController.isValidMobile(mobile)) {
+                        int option = JOptionPane.showConfirmDialog(null,
+                                "Invalid mobile Number... Do you want to input number again ?");
+                        if (option == JOptionPane.YES_OPTION) {
+                            txtMobile.setText("");
+                            txtMobile.requestFocus();
+                        } else if (option == JOptionPane.NO_OPTION) {
+                            txtMobile.setText("");
+                            txtName.setText("");
+                            txtCompany.setText("");
+                            txtSalary.setText("");
+                            txtBirthday.setText("");
+                            dispose();
+                        }
+                        return;
+                    }
                 }
 
                 if (!ContactController.isValidSalary(salary)) {
